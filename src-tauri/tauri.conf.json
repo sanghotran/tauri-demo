@@ -12,8 +12,9 @@
       {
         "title": "demo",
         "width": 380,
-        "height": 700,
+        "height": 530,
         "resizable": false,
+        "maximizable": false,
         "fullscreen": false,
         "center": true
       }

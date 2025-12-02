@@ -40,6 +40,7 @@ This template should help get you started developing with Tauri in vanilla HTML,
     - width-window = width-css + 20
     - height-window = height-css + 20
     - resizable: false
+    - maximizable: false
     - center: true
 7. Test local
 ```bash
@@ -49,6 +50,6 @@ This template should help get you started developing with Tauri in vanilla HTML,
 ```bash
     git push
 ```
-    
+
 
 
