@@ -1,15 +1,20 @@
-// Import hàm gọi lệnh xuống Rust
+// Import từ core (Bản 2.1.0 hỗ trợ cái này chuẩn 100%)
 import { invoke } from '@tauri-apps/api/core';
 
-// Nút Minimize: Gọi lệnh 'minimize_app' bên Rust
-document.getElementById('titlebar-minimize').addEventListener('click', () => {
+// Xử lý Custom Titlebar bằng cách gọi xuống Rust
+const minimizeBtn = document.getElementById('titlebar-minimize');
+if (minimizeBtn) {
+  minimizeBtn.addEventListener('click', () => {
     invoke('minimize_app');
-});
+  });
+}
 
-// Nút Close: Gọi lệnh 'close_app' bên Rust
-document.getElementById('titlebar-close').addEventListener('click', () => {
+const closeBtn = document.getElementById('titlebar-close');
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
     invoke('close_app');
-});
+  });
+}
 
 
 class Calculator {
