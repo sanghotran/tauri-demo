@@ -33,7 +33,7 @@ jobs:
       - name: Rust Cache
         uses: swatinem/rust-cache@v2
         with:
-          work-dir: src-tauri  # <--- Chỉ định thư mục chứa code Rust
+          workspace: ./src-tauri -> ./src-tauri/target
       # ---------------------
 
       - name: Install dependencies
