@@ -1,4 +1,4 @@
-name: Build App (Optimized)
+name: Build App (Final)
 
 on:
   push:
@@ -20,26 +20,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1. Cài Node.js + Kích hoạt Cache cho NPM
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # <--- DÒNG MỚI: Tự động lưu cache thư viện JS
+          cache: 'npm'
 
-      # 2. Cài Rust
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
-      # 3. Kích hoạt Cache cho RUST (Quan trọng nhất để build nhanh)
       - name: Rust Cache
-        uses: swatinem/rust-cache@v2 # <--- DÒNG MỚI: Cache thần thánh cho Rust
+        uses: swatinem/rust-cache@v2
 
-      # 4. Cài thư viện JS
-      - name: Install dependencies (frontend)
+      - name: Install dependencies
         run: npm install
 
-      # 5. Build App
       - name: Build Tauri App
         uses: tauri-apps/tauri-action@v0
         env:
@@ -47,6 +42,12 @@ jobs:
         with:
           tagName: app-v__VERSION__
           releaseName: "App v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
           releaseDraft: true
           prerelease: false
+
+      # Bước upload file quan trọng đây
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-setup
+          path: src-tauri/target/release/bundle/nsis/*.exe
