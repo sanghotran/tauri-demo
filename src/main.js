@@ -1,17 +1,16 @@
-// Import hàm từ gói window chính thức
-import { getCurrentWindow } from '@tauri-apps/plugin-window';
+// Import hàm gọi lệnh xuống Rust
+import { invoke } from '@tauri-apps/api/core';
 
-const appWindow = getCurrentWindow();
-
-// Gắn sự kiện cho nút Minimize
+// Nút Minimize: Gọi lệnh 'minimize_app' bên Rust
 document.getElementById('titlebar-minimize').addEventListener('click', () => {
-    appWindow.minimize();
+    invoke('minimize_app');
 });
 
-// Gắn sự kiện cho nút Close
+// Nút Close: Gọi lệnh 'close_app' bên Rust
 document.getElementById('titlebar-close').addEventListener('click', () => {
-    appWindow.close();
+    invoke('close_app');
 });
+
 
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
