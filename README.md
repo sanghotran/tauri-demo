@@ -50,6 +50,18 @@ This template should help get you started developing with Tauri in vanilla HTML,
 ```bash
     git push
 ```
+9. Note
+    config:
+        withGlobalTauri: true
+        decorations: false
+        transparent: true
+    frontend:
+        html: không dùng type=module
+        js: không dùng import
+        const invoke = window.__TAURI__ ? window.__TAURI__.core.invoke : null;
+        thêm data-tauri-drag-region vào title bar
+    backend:
+        viết hàm trong lib.rs
 
 
 
