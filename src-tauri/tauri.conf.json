@@ -11,7 +11,7 @@
     "windows": [
       {
         "title": "demo",
-        "width": 380,
+        "width": 350,
         "height": 530,
         "resizable": false,
         "maximizable": false,
