@@ -1,0 +1,52 @@
+name: Build App (Optimized)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-tauri:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [windows-latest]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. Cài Node.js + Kích hoạt Cache cho NPM
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm' # <--- DÒNG MỚI: Tự động lưu cache thư viện JS
+
+      # 2. Cài Rust
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      # 3. Kích hoạt Cache cho RUST (Quan trọng nhất để build nhanh)
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2 # <--- DÒNG MỚI: Cache thần thánh cho Rust
+
+      # 4. Cài thư viện JS
+      - name: Install dependencies (frontend)
+        run: npm install
+
+      # 5. Build App
+      - name: Build Tauri App
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: app-v__VERSION__
+          releaseName: "App v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
+          prerelease: false
