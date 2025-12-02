@@ -1,4 +1,4 @@
-name: Build App (Final)
+name: Build App (Fixed)
 
 on:
   push:
@@ -29,8 +29,12 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      # --- SỬA LỖI Ở ĐÂY ---
       - name: Rust Cache
         uses: swatinem/rust-cache@v2
+        with:
+          work-dir: src-tauri  # <--- Chỉ định thư mục chứa code Rust
+      # ---------------------
 
       - name: Install dependencies
         run: npm install
@@ -45,8 +49,7 @@ jobs:
           releaseDraft: true
           prerelease: false
 
-      # Bước upload file quan trọng đây
-      - name: Upload Artifact
+      - name: Upload Artifact (Portable)
         uses: actions/upload-artifact@v4
         with:
           name: app-portable
