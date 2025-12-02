@@ -1,5 +1,3 @@
-import './styles.css'; // Nếu dùng Vite thì giữ dòng này
-
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
