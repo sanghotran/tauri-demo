@@ -1,19 +1,26 @@
-// Import từ core (Bản 2.1.0 hỗ trợ cái này chuẩn 100%)
-import { invoke } from '@tauri-apps/api/core';
+// --- KHÔNG DÙNG IMPORT NỮA ---
+// Lấy hàm invoke từ biến toàn cục
+const invoke = window.__TAURI__ ? window.__TAURI__.core.invoke : null;
 
-// Xử lý Custom Titlebar bằng cách gọi xuống Rust
-const minimizeBtn = document.getElementById('titlebar-minimize');
-if (minimizeBtn) {
-  minimizeBtn.addEventListener('click', () => {
-    invoke('minimize_app');
-  });
+// Hàm gọi lệnh an toàn (để không lỗi trên web)
+function safeInvoke(command) {
+    if (invoke) {
+        invoke(command);
+    } else {
+        console.log(`[Web Mode] Giả lập lệnh: ${command}`);
+    }
 }
 
+// Gắn sự kiện Minimize
+const minBtn = document.getElementById('titlebar-minimize');
+if (minBtn) {
+    minBtn.addEventListener('click', () => safeInvoke('minimize_app'));
+}
+
+// Gắn sự kiện Close
 const closeBtn = document.getElementById('titlebar-close');
 if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    invoke('close_app');
-  });
+    closeBtn.addEventListener('click', () => safeInvoke('close_app'));
 }
 
 
