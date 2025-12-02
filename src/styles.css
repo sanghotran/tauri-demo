@@ -1,3 +1,55 @@
+/* --- CUSTOM TITLEBAR (THANH TIÊU ĐỀ) --- */
+.titlebar {
+  height: 30px;
+  background: rgba(255, 255, 255, 0.05); /* Kính mờ nhẹ */
+  backdrop-filter: blur(5px);
+  user-select: none; /* Không cho bôi đen chữ */
+  display: flex;
+  justify-content: flex-end; /* Đẩy nút sang phải */
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px 10px 0 0; /* Bo góc trên nếu muốn */
+}
+
+/* Tên App và Icon */
+.app-icon {
+  margin-left: 10px;
+  margin-right: 5px;
+  pointer-events: none; /* Để click xuyên qua (kéo cửa sổ được) */
+}
+.app-name {
+  flex-grow: 1; /* Chiếm hết chỗ trống để đẩy nút sang phải */
+  font-size: 12px;
+  color: #ccc;
+  pointer-events: none;
+}
+
+/* Nút điều khiển (Minimize / Close) */
+.titlebar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 30px;
+  cursor: default; /* Mặc định là mũi tên */
+}
+
+.titlebar-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Nút Close màu đỏ khi hover */
+.close-btn:hover {
+  background: #ff4d4d;
+}
+
+/* --- GIAO DIỆN MÁY TÍNH --- */
+
 /* Reset mặc định */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -58,6 +110,7 @@ body {
 
 /* --- KHUNG MÁY TÍNH --- */
 .calculator-container {
+  margin-top: 30px; /* QUAN TRỌNG: Để không bị titlebar che mất */
   width: 350px;
   background: rgba(255, 255, 255, 0.05); /* Màu trong suốt */
   backdrop-filter: blur(20px); /* Kính mờ */
@@ -148,4 +201,12 @@ body {
 /* Nút to gấp đôi */
 .span-two {
   grid-column: span 2;
+}
+
+/* Bo góc cho các nút ở góc dưới cùng để khớp với viền khung */
+.border-radius-bottom-left {
+    border-bottom-left-radius: 25px;
+}
+.border-radius-bottom-right {
+    border-bottom-right-radius: 25px;
 }

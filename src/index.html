@@ -8,20 +8,34 @@
 </head>
 <body>
 
-  <!-- Khung bao ngoài hiệu ứng nền -->
+  <!-- THANH TIÊU ĐỀ CUSTOM (MỚI) -->
+  <!-- data-tauri-drag-region: Giúp kéo được cửa sổ -->
+  <div data-tauri-drag-region class="titlebar">
+    <div class="app-icon">🧮</div>
+    <div class="app-name">Calculator</div>
+    
+    <!-- Nút điều khiển -->
+    <div class="titlebar-button" id="titlebar-minimize">
+      <svg width="10" height="1" viewBox="0 0 10 1"><rect width="10" height="1" fill="white"/></svg>
+    </div>
+    <div class="titlebar-button close-btn" id="titlebar-close">
+      <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1,1 L9,9 M9,1 L1,9" stroke="white" stroke-width="1.5"/></svg>
+    </div>
+  </div>
+
+  <!-- Nền hiệu ứng -->
   <div class="background-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
   </div>
 
+  <!-- Máy tính -->
   <div class="calculator-container">
-    <!-- Màn hình hiển thị -->
     <div class="display">
       <div class="previous-operand" id="previous-operand"></div>
       <div class="current-operand" id="current-operand">0</div>
     </div>
 
-    <!-- Bàn phím -->
     <div class="buttons-grid">
       <button class="btn span-two fn-btn" data-action="clear">AC</button>
       <button class="btn fn-btn" data-action="delete">DEL</button>
