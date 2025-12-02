@@ -1,3 +1,18 @@
+// Import hàm từ gói window chính thức
+import { getCurrentWindow } from '@tauri-apps/plugin-window';
+
+const appWindow = getCurrentWindow();
+
+// Gắn sự kiện cho nút Minimize
+document.getElementById('titlebar-minimize').addEventListener('click', () => {
+    appWindow.minimize();
+});
+
+// Gắn sự kiện cho nút Close
+document.getElementById('titlebar-close').addEventListener('click', () => {
+    appWindow.close();
+});
+
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
@@ -167,16 +182,4 @@ document.addEventListener('keydown', (e) => {
         calculator.clear();
     }
     calculator.updateDisplay();
-});
-
-
-// --- LOGIC TITLEBAR (MỚI) ---
-const appWindow = window.__TAURI__.window.appWindow;
-
-document.getElementById('titlebar-minimize').addEventListener('click', () => {
-    appWindow.minimize();
-});
-
-document.getElementById('titlebar-close').addEventListener('click', () => {
-    appWindow.close();
 });
